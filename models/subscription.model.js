@@ -22,10 +22,11 @@ const subscriptionSchema = new mongoose.Schema({
     frequency:{
         type:String,
         enum:["daily", "weekly", "monthly", "yearly"],
+        required:true
     },
     category:{
         type:String,
-        enum:['sport', 'news', 'enterainment', 'lifestyle', 'technology', 'finance', 'polictics', 'other'],
+        enum:['sport', 'news', 'entertainment', 'lifestyle', 'technology', 'finance', 'politics', 'other'],
         required:true
     },
     paymentMethod:{
@@ -48,7 +49,6 @@ const subscriptionSchema = new mongoose.Schema({
     },
     renewalDate:{
         type:Date,
-        required:true,
         validate:{
             validator : function(value){
                 return value > this.startDate;
@@ -61,10 +61,8 @@ const subscriptionSchema = new mongoose.Schema({
         ref:'User',
         required:true,
         index:true
-    },
-    
-    options:{timestamps:true}
-});
+    },   
+},{timestamps:true});
 
 
 //Auto-calculate renewal date if missing
